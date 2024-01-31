@@ -8,7 +8,7 @@ function StartScreen({ state, dispatch }) {
   return (
     <div className=" space-y-5 text-center">
       <Logo />
-      <p className="text-[1.8rem] text-stone-100 ">
+      <p className="text-[1rem] text-stone-100 md:text-[1.2rem] lg:text-[1.8rem] ">
         Test Your React Knowledge Here!🎯{" "}
       </p>
       <div className=" w-[40%] p-1 mx-auto rounded-md  space-y-14">
@@ -21,10 +21,10 @@ function StartScreen({ state, dispatch }) {
               </span>
             )}
           </p>
-          <div className="space-x-10">
+          <div className="space-x-10 sm:space-x-0 md:space-x-5">
             <button
               onClick={(e) => dispatch({type: "submitLevel", payload : e.target.value})}
-              className="bg-sky-100 font-semibold hover:bg-transparent transition-all duration-150 ease-in  hover:text-white hover:border hover:border-sky-100 px-10 py-3 rounded-full text-xl"
+              className="bg-sky-100 font-semibold hover:bg-transparent transition-all duration-150 ease-in  hover:text-white hover:border hover:border-sky-100 px-10 py-3 sm:px-4 sm:py-1 md:px-6 md:py-2 rounded-full text-xl"
               type="button"
               value="easy"
             >
