@@ -13,7 +13,7 @@ const initialState = {
   index: 0,
   answer: null,
   answeredPoints: 0,
-  secondsRemain: 10,
+  secondsRemain: 20,
 };
 
 const reducer = (state, action) => {
@@ -26,16 +26,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         level: action.payload,
-        quesAccordingLevel: state.questions.slice(),
+        quesAccordingLevel: state.questions.slice(0, 15),
       };
 
     case "answerQuestion":
       const question = state.questions.at(state.index);
-      console.log(
-        question.points,
-        question.correctOption,
-        state.answeredPoints
-      );
+
       return {
         ...state,
         answer: action.payload,
@@ -45,9 +41,23 @@ const reducer = (state, action) => {
             : state.answeredPoints,
       };
     case "startQuiz":
-      if(state.level === "easy" ) return {...state, quesAccordingLevel: state.questions.slice(0,5),status: "start"}  
-      if(state.level === "medium" ) return {...state, quesAccordingLevel: state.questions.slice(0,10),status: "start"}  
-       return {...state, quesAccordingLevel: state.questions.slice(0,15),status: "start"}  
+      if (state.level === "easy")
+        return {
+          ...state,
+          quesAccordingLevel: state.questions.slice(0, 5),
+          status: "start",
+        };
+      if (state.level === "medium")
+        return {
+          ...state,
+          quesAccordingLevel: state.questions.slice(0, 10),
+          status: "start",
+        };
+      return {
+        ...state,
+        quesAccordingLevel: state.questions.slice(0, 15),
+        status: "start",
+      };
     case "nextQuestion":
       return { ...state, index: state.index++, answer: null };
     case "tick":
@@ -67,8 +77,9 @@ function App() {
   const { status } = state;
   useEffect(() => {
     async function fetchQuestion() {
-      let data = await fetch("http://localhost:8001/questions");
+      let data = await fetch("http://localhost:8005/questions");
       let res = await data.json();
+      
       dispatch({ type: "start", payload: res });
     }
 
