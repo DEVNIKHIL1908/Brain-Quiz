@@ -3,7 +3,7 @@ import Timer from "../Timer";
 
 function QuestionScreen({ state, dispatch }) {
   const { questions, index, answer, name, level, quesAccordingLevel } = state;
-  console.log(quesAccordingLevel);
+
   const questionData = quesAccordingLevel[index];
   const { question, options, correctOption } = questionData;
 
